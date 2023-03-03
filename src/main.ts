@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:48
  * @LastEditors: bin
- * @LastEditTime: 2022-09-23 09:04:07
+ * @LastEditTime: 2023-03-03 10:13:31
  * @objectDescription: 全局入口文件
  */
 import { createApp } from 'vue'
@@ -18,6 +18,7 @@ import router from './router'
 import store from './store'
 // mock文件
 import '../mock'
+import "uno.css"
 
 const app = createApp(App)
 

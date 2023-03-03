@@ -20,6 +20,7 @@
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
@@ -30,7 +31,10 @@
     "mockjs": "^1.1.0",
     "sass": "^1.55.0",
     "typescript": "^4.8.3",
+    "unocss": "^0.50.3",
+    "unplugin-vue-define-options": "^1.2.3",
     "vite": "^3.1.0",
+    "vite-svg-loader": "^4.0.0",
     "vue-tsc": "^0.40.4"
   }
 }
