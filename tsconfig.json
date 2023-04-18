@@ -12,6 +12,15 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
+    "types": [
+      "node",
+      "vite/client",
+      /** Element Plus 的 Volar 插件支持 */
+      "element-plus/global",
+      "vitest",
+      "vitest/globals",
+      "unplugin-vue-define-options/macros-global"
+    ],
     "baseUrl": "./",
     "paths": {
       "@/*": [

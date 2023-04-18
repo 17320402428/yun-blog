@@ -2,20 +2,24 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:48
  * @LastEditors: bin
- * @LastEditTime: 2022-09-22 15:34:52
+ * @LastEditTime: 2023-04-17 11:05:10
  * @objectDescription: html入口文件
 -->
 <template>
-  <router-view></router-view>
+	<ElConfigProvider :locale="locale">
+		<router-view />
+	</ElConfigProvider>
 </template>
+<script lang="ts" setup>
+import { h } from 'vue'
+// import { useTheme } from '@/hooks/useTheme'
+import { ElNotification } from 'element-plus'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
-<style scoped>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+// const { initTheme } = useTheme()
+
+/** 初始化主题 */
+// initTheme()
+/** 将 Element Plus 的语言设置为中文 */
+const locale = zhCn
+</script>
