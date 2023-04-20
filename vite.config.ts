@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:50
  * @LastEditors: bin
- * @LastEditTime: 2023-03-03 09:41:58
+ * @LastEditTime: 2023-04-19 15:44:24
  * @objectDescription: vite配置文件
  */
 import { defineConfig } from 'vite'
@@ -39,15 +39,15 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
       /** 端口被占用时，是否直接退出 */
       strictPort: false,
       /** 接口代理 */
-      // proxy: {
-      //   '/api/v1': {
-      //     target: 'https://mock.mengxuegu.com/mock/63218b5fb4c53348ed2bc212/api/v1',
-      //     ws: true,
-      //     /** 是否允许跨域 */
-      //     changeOrigin: true,
-      //     rewrite: path => path.replace('/api/v1', '')
-      //   }
-      // }
+      proxy: {
+        '/api/v1': {
+          target: 'https://mock.mengxuegu.com/mock/63218b5fb4c53348ed2bc212/api/v1',
+          ws: true,
+          /** 是否允许跨域 */
+          changeOrigin: true,
+          rewrite: path => path.replace('/api/v1', '')
+        }
+      }
     },
     build: {
       /** 消除打包大小超过 500kb 警告 */

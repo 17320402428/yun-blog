@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-22 15:17:44
  * @LastEditors: bin
- * @LastEditTime: 2023-04-17 13:56:37
+ * @LastEditTime: 2023-04-18 16:38:46
  * @objectDescription: 路由入口文件
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
@@ -109,7 +109,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
   }
 ]
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory('/'),
   routes: constantRoutes
 })
 /** 重置路由 */
