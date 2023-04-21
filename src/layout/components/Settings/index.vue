@@ -1,9 +1,3 @@
-<script lang="ts" setup>
-import { useSettingsStore } from "@/store/modules/settings"
-
-const settingsStore = useSettingsStore()
-</script>
-
 <template>
   <div class="drawer-container">
     <div>
@@ -43,24 +37,30 @@ const settingsStore = useSettingsStore()
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import { useSettingsStore } from "@/store/modules/settings"
 
+const settingsStore = useSettingsStore()
+</script>
 <style lang="scss" scoped>
 .drawer-container {
   padding: 24px;
   font-size: 14px;
   line-height: 1.5;
   word-wrap: break-word;
+
   .drawer-title {
     margin-bottom: 12px;
     font-size: 14px;
     line-height: 22px;
   }
+
   .drawer-item {
     font-size: 14px;
     padding: 12px 0;
   }
+
   .drawer-switch {
     float: right;
   }
-}
-</style>
+}</style>

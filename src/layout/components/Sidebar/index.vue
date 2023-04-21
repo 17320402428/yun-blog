@@ -2,9 +2,34 @@
  * @Author: bin
  * @Date: 2023-04-13 17:31:52
  * @LastEditors: bin
- * @LastEditTime: 2023-04-17 08:48:57
+ * @LastEditTime: 2023-04-21 13:41:43
  * @objectDescription: 入口文件
 -->
+<template>
+  <div :class="{ 'has-logo': showSidebarLogo }">
+    <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <el-menu
+        :default-active="activeMenu"
+        :collapse="isCollapse"
+        :background-color="v3SidebarMenuBgColor"
+        :text-color="v3SidebarMenuTextColor"
+        :active-text-color="v3SidebarMenuActiveTextColor"
+        :unique-opened="true"
+        :collapse-transition="false"
+        mode="vertical"
+      >
+        <SidebarItem
+          v-for="route in permissionStore.routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+          :is-collapse="isCollapse"
+        />
+      </el-menu>
+    </el-scrollbar>
+  </div>
+</template>
 <script lang="ts" setup>
 import { computed } from "vue"
 import { useRoute } from "vue-router"
@@ -39,33 +64,6 @@ const isCollapse = computed(() => {
   return !appStore.sidebar.opened
 })
 </script>
-
-<template>
-  <div :class="{ 'has-logo': showSidebarLogo }">
-    <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse"
-        :background-color="v3SidebarMenuBgColor"
-        :text-color="v3SidebarMenuTextColor"
-        :active-text-color="v3SidebarMenuActiveTextColor"
-        :unique-opened="true"
-        :collapse-transition="false"
-        mode="vertical"
-      >
-        <SidebarItem
-          v-for="route in permissionStore.routes"
-          :key="route.path"
-          :item="route"
-          :base-path="route.path"
-          :is-collapse="isCollapse"
-        />
-      </el-menu>
-    </el-scrollbar>
-  </div>
-</template>
-
 <style lang="scss" scoped>
 @mixin tip-line {
   &::before {

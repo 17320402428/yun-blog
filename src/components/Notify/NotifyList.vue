@@ -1,15 +1,10 @@
-<script lang="ts" setup>
-import { PropType } from "vue"
-import { type IListItem } from "./data"
-
-const props = defineProps({
-  list: {
-    type: Object as PropType<IListItem[]>,
-    required: true
-  }
-})
-</script>
-
+<!--
+ * @Author: bin
+ * @Date: 2023-04-17 13:47:29
+ * @LastEditors: bin
+ * @LastEditTime: 2023-04-21 13:38:58
+ * @objectDescription: 入口文件
+-->
 <template>
   <el-empty v-if="props.list.length === 0" />
   <el-card v-else v-for="(item, index) in props.list" :key="index" shadow="never" class="card-container">
@@ -32,27 +27,43 @@ const props = defineProps({
     </div>
   </el-card>
 </template>
+<script lang="ts" setup>
+import { PropType } from "vue"
+import { type IListItem } from "./data"
+
+const props = defineProps({
+  list: {
+    type: Object as PropType<IListItem[]>,
+    required: true
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 .card-container {
   margin-bottom: 10px;
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .card-title {
       font-weight: bold;
       margin-right: 10px;
     }
+
     .card-time {
       font-size: 12px;
       color: grey;
     }
+
     .card-avatar {
       display: flex;
       align-items: center;
     }
   }
+
   .card-body {
     font-size: 12px;
   }

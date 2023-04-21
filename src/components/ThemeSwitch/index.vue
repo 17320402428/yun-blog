@@ -1,14 +1,10 @@
-<script lang="ts" setup>
-import { type ThemeName, useTheme } from "@/hooks/useTheme"
-import { MagicStick } from "@element-plus/icons-vue"
-
-const { themeList, activeThemeName, setTheme } = useTheme()
-
-const handleSetTheme = (name: ThemeName) => {
-  setTheme(name)
-}
-</script>
-
+<!--
+ * @Author: bin
+ * @Date: 2023-04-17 13:48:27
+ * @LastEditors: bin
+ * @LastEditTime: 2023-04-21 13:39:51
+ * @objectDescription: 入口文件
+-->
 <template>
   <el-dropdown trigger="click" @command="handleSetTheme">
     <div>
@@ -20,15 +16,21 @@ const handleSetTheme = (name: ThemeName) => {
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item
-          v-for="(theme, index) in themeList"
-          :key="index"
-          :disabled="activeThemeName === theme.name"
-          :command="theme.name"
-        >
+        <el-dropdown-item v-for="(theme, index) in themeList" :key="index" :disabled="activeThemeName === theme.name"
+          :command="theme.name">
           <span>{{ theme.title }}</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
+<script lang="ts" setup>
+import { type ThemeName, useTheme } from "@/hooks/useTheme"
+import { MagicStick } from "@element-plus/icons-vue"
+
+const { themeList, activeThemeName, setTheme } = useTheme()
+
+const handleSetTheme = (name: ThemeName) => {
+  setTheme(name)
+}
+</script>

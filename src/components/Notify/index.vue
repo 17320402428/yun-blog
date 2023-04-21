@@ -1,3 +1,34 @@
+<template>
+  <div class="notify">
+    <el-popover placement="bottom" :width="popoverWidth" trigger="click">
+      <template #reference>
+        <el-badge :value="badgeValue" :max="badgeMax" :hidden="badgeValue === 0">
+          <el-tooltip effect="dark" content="消息通知" placement="bottom">
+            <el-icon :size="20">
+              <Bell />
+            </el-icon>
+          </el-tooltip>
+        </el-badge>
+      </template>
+      <template #default>
+        <el-tabs v-model="activeName" class="demo-tabs" stretch>
+          <el-tab-pane v-for="(item, index) in data" :name="item.name" :key="index">
+            <template #label>
+              {{ item.name }}
+              <el-badge :value="item.list.length" :max="badgeMax" :type="item.type" />
+            </template>
+            <el-scrollbar height="400px">
+              <NotifyList :list="item.list" />
+            </el-scrollbar>
+          </el-tab-pane>
+        </el-tabs>
+        <div class="notify-history">
+          <el-button link @click="handleHistory">查看{{ activeName }}历史</el-button>
+        </div>
+      </template>
+    </el-popover>
+  </div>
+</template>
 <script lang="ts" setup>
 import { ref, computed } from "vue"
 import { ElMessage } from "element-plus"
@@ -53,44 +84,12 @@ const handleHistory = () => {
   ElMessage.success(`跳转到${activeName.value}历史页面`)
 }
 </script>
-
-<template>
-  <div class="notify">
-    <el-popover placement="bottom" :width="popoverWidth" trigger="click">
-      <template #reference>
-        <el-badge :value="badgeValue" :max="badgeMax" :hidden="badgeValue === 0">
-          <el-tooltip effect="dark" content="消息通知" placement="bottom">
-            <el-icon :size="20">
-              <Bell />
-            </el-icon>
-          </el-tooltip>
-        </el-badge>
-      </template>
-      <template #default>
-        <el-tabs v-model="activeName" class="demo-tabs" stretch>
-          <el-tab-pane v-for="(item, index) in data" :name="item.name" :key="index">
-            <template #label>
-              {{ item.name }}
-              <el-badge :value="item.list.length" :max="badgeMax" :type="item.type" />
-            </template>
-            <el-scrollbar height="400px">
-              <NotifyList :list="item.list" />
-            </el-scrollbar>
-          </el-tab-pane>
-        </el-tabs>
-        <div class="notify-history">
-          <el-button link @click="handleHistory">查看{{ activeName }}历史</el-button>
-        </div>
-      </template>
-    </el-popover>
-  </div>
-</template>
-
 <style lang="scss" scoped>
 .notify {
   margin-right: 10px;
   color: var(--el-text-color-regular);
 }
+
 .notify-history {
   text-align: center;
   padding-top: 12px;
