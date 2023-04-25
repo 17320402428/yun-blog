@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-13 15:49:48
  * @LastEditors: bin
- * @LastEditTime: 2023-04-13 17:29:06
+ * @LastEditTime: 2023-04-24 15:00:51
  * @objectDescription: tagsView模块
  */
 import { ref } from 'vue'
@@ -15,7 +15,7 @@ export type ITagView = Partial<RouteLocationNormalized>
 // 创建一个store实例
 export const useTagsViewStore = defineStore('tags-view', () => {
   const visitedViews = ref<ITagView[]>([])
-  const cachedViews = ref<ITagView[]>([])
+  const cachedViews = ref<string[]>([])
 
   //#region add
   const addVisitedView = (view: ITagView) => {

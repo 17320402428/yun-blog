@@ -1,4 +1,11 @@
-const SYSTEM_NAME = "v3-admin-vite"
+/*
+ * @Author: bin
+ * @Date: 2023-04-17 09:02:25
+ * @LastEditors: bin
+ * @LastEditTime: 2023-04-24 08:49:25
+ * @objectDescription: 入口文件
+ */
+const SYSTEM_NAME = "yungui-blog"
 
 /** 缓存数据时用到的 Key */
 class CacheKey {

@@ -1,3 +1,10 @@
+<!--
+ * @Author: bin
+ * @Date: 2023-04-17 08:49:23
+ * @LastEditors: bin
+ * @LastEditTime: 2023-04-24 17:03:26
+ * @objectDescription: 入口文件
+-->
 <template>
   <div class="sidebar-logo-container" :class="{ collapse: props.collapse }">
     <transition name="sidebar-logo-fade">

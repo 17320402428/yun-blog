@@ -2,14 +2,15 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:50
  * @LastEditors: bin
- * @LastEditTime: 2023-04-20 10:35:04
+ * @LastEditTime: 2023-04-24 10:23:53
  * @objectDescription: vite配置文件
  */
 import { defineConfig } from 'vite'
 import { type ConfigEnv, type UserConfigExport, loadEnv } from 'vite'
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from "@vitejs/plugin-vue-jsx"
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import svgLoader from "vite-svg-loader"
 import UnoCSS from "unocss/vite"
 import DefineOptions from "unplugin-vue-define-options/vite"
@@ -75,6 +76,10 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
       vueJsx(),
       /** 将 SVG 静态图转化为 Vue 组件 */
       svgLoader(),
+      createSvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), "src/icons/svg")],
+        symbolId: "icon-[dir]-[name]"
+      }),
       /** UnoCSS */
       UnoCSS(),
       /** DefineOptions 可以更简单的注册组件名称 */

@@ -83,8 +83,6 @@ const handleLogin = () => {
           code: loginForm.code
         })
         .then((res) => {
-          console.log(res);
-
           router.push({ path: "/" })
         })
         .catch(() => {

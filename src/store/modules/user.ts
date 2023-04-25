@@ -31,8 +31,8 @@ export const useUserStore = defineStore("user", () => {
         code: loginData.code
       })
         .then((res) => {
-          setToken(res.data.token)
-          token.value = res.data.token
+          setToken(res.data.access_token)
+          token.value = res.data.access_token
           resolve(res.data)
         })
         .catch((error) => {

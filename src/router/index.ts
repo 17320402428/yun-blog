@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-22 15:17:44
  * @LastEditors: bin
- * @LastEditTime: 2023-04-18 16:38:46
+ * @LastEditTime: 2023-04-24 15:10:26
  * @objectDescription: 路由入口文件
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
@@ -56,6 +56,23 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "首页",
           svgIcon: "dashboard",
+          affix: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/user",
+    component: Layout,
+    redirect: "/user/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/user/index.vue"),
+        name: "User",
+        meta: {
+          title: "用户管理",
+          svgIcon: "user",
           affix: true
         }
       }
