@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-22 15:17:44
  * @LastEditors: bin
- * @LastEditTime: 2023-04-24 15:10:26
+ * @LastEditTime: 2023-04-27 09:24:48
  * @objectDescription: 路由入口文件
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
@@ -73,7 +73,134 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "用户管理",
           svgIcon: "user",
-          affix: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/article",
+    component: Layout,
+    redirect: "/article/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/article/index.vue"),
+        name: "Article",
+        meta: {
+          title: "文章管理",
+          svgIcon: "article",
+        }
+      }
+    ]
+  },
+  {
+    path: "/comment",
+    component: Layout,
+    redirect: "/comment/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/comment/index.vue"),
+        name: "Comment",
+        meta: {
+          title: "评论管理",
+          svgIcon: "comment",
+        }
+      }
+    ]
+  },
+  {
+    path: "/label",
+    component: Layout,
+    redirect: "/label/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/label/index.vue"),
+        name: "Label",
+        meta: {
+          title: "标签管理",
+          svgIcon: "label",
+        }
+      }
+    ]
+  },
+  {
+    path: "/setting",
+    component: Layout,
+    redirect: "/setting/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/setting/index.vue"),
+        name: "Setting",
+        meta: {
+          title: "网站管理",
+          svgIcon: "setting",
+        }
+      }
+    ]
+  },
+  {
+    path: "/authority",
+    component: Layout,
+    redirect: "/authority/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/authority/index.vue"),
+        name: "Authority",
+        meta: {
+          title: "权限管理",
+          svgIcon: "authority",
+        }
+      }
+    ]
+  },
+  {
+    path: "/advertisement",
+    component: Layout,
+    redirect: "/advertisement/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/advertisement/index.vue"),
+        name: "Advertisement",
+        meta: {
+          title: "广告管理",
+          svgIcon: "advertisement",
+        }
+      }
+    ]
+  },
+  {
+    path: "/integral",
+    component: Layout,
+    redirect: "/integral/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/integral/index.vue"),
+        name: "Integral",
+        meta: {
+          title: "积分管理",
+          svgIcon: "integral",
+        }
+      }
+    ]
+  },
+  {
+    path: "/messageBoard",
+    component: Layout,
+    redirect: "/messageBoard/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/messageBoard/index.vue"),
+        name: "MessageBoard",
+        meta: {
+          title: "留言板管理",
+          svgIcon: "messageBoard",
         }
       }
     ]
