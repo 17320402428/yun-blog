@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-12 14:07:12
+ * @LastEditTime: 2023-05-12 16:57:53
  * @objectDescription: 入口文件
 -->
 <template>
@@ -78,8 +78,6 @@ const resetSearch = ()=> {
   queryFormRef.value.resetFields()
   getTableData()
 }
-
-
 // #endregion
 
 // #region 修改
