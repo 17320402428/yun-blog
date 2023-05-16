@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-15 14:10:23
+ * @LastEditTime: 2023-05-16 11:15:46
  * @objectDescription: 入口文件
 -->
 <template>
@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus';
-import type { IGetTableData } from '@/api/user/types/table'
+import type { IGetTableData } from '@/api/user/types/user'
 import {getTableDataApi} from '@/api/user'
 const loading = ref<boolean>(false)
 // #region 查询

@@ -6,7 +6,7 @@
  * @objectDescription: 入口文件
  */
 import { request } from "@/utils/service"
-import type * as Table from './types/table'
+import type * as Table from './types/user'
 
 export function getTableDataApi(params: Table.IGetTableRequestData) {
   return request<Table.GetTableResponseData>({
