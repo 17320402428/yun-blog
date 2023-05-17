@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 08:51:13
  * @LastEditors: bin
- * @LastEditTime: 2023-05-17 09:56:08
+ * @LastEditTime: 2023-05-17 10:50:00
  * @objectDescription: 入口文件
 -->
 <template>
@@ -37,8 +37,8 @@
           <el-table-column prop="creatAt" label="创建时间" align="center" />
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
-              <el-button type="warning" plain @click="handleUpdate(scope.row)">编辑</el-button>
-              <el-button type="danger" plain @click="handleDelete(scope.row)">删除</el-button>
+              <el-button type="warning" link @click="handleUpdate(scope.row)">编辑</el-button>
+              <el-button type="danger" link @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
