@@ -2,12 +2,12 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-16 15:17:52
+ * @LastEditTime: 2023-05-17 09:09:42
  * @objectDescription: 入口文件
 -->
 <template>
   <div class="app-container">
-    <el-card shadow="never"  class="search-wrapper">
+    <el-card shadow="never" class="search-wrapper">
       <el-form ref="queryFormRef" inline :model="queryForm">
         <el-form-item prop="username" label="用户名">
           <el-input v-model="queryForm.username" placeholder="请输入用户名" />
@@ -46,7 +46,7 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus';
 import type { IGetTableData } from '@/api/user/types/user'
-import {getTableDataApi} from '@/api/user'
+import { getTableDataApi } from '@/api/user'
 const loading = ref<boolean>(false)
 // #region 查询
 const tableData = ref<IGetTableData[]>([])
@@ -71,10 +71,10 @@ const getTableData = () => {
   })
 }
 getTableData()
-const handSearch = ()=> {
+const handSearch = () => {
   getTableData()
 }
-const resetSearch = ()=> {
+const resetSearch = () => {
   queryFormRef.value.resetFields()
   getTableData()
 }
@@ -93,9 +93,10 @@ const handleDelete = () => {
 .search-wrapper {
   margin-bottom: 20px;
 }
+
 .pagination {
   margin-top: 20px;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 </style>

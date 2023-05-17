@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 08:51:13
  * @LastEditors: bin
- * @LastEditTime: 2023-05-16 15:17:55
+ * @LastEditTime: 2023-05-17 09:56:08
  * @objectDescription: 入口文件
 -->
 <template>
@@ -37,8 +37,8 @@
           <el-table-column prop="creatAt" label="创建时间" align="center" />
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
-              <el-button type="warning" plain @click="handleUpdate">编辑</el-button>
-              <el-button type="danger" plain @click="handleDelete">删除</el-button>
+              <el-button type="warning" plain @click="handleUpdate(scope.row)">编辑</el-button>
+              <el-button type="danger" plain @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -47,16 +47,19 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { reactive, ref } from "vue"
+import { useRouter } from "vue-router";
 import type { IGetTableData } from '@/api/article/types/article'
 import type { FormInstance } from 'element-plus';
 import { getTableDataApi } from '@/api/article'
+const router = useRouter()
 const loading = ref<boolean>(false)
 
 // #region 查询
 const tableData = ref<IGetTableData[]>([])
 const total = ref<number>(null)
-const queryFormRef = ref<IGetTableData | null>(null)
+const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   title: '',
   /* 文章分类 */
@@ -77,25 +80,53 @@ const getTableData = () => {
 }
 getTableData()
 const handSearch = () => {
-
+  getTableData()
 }
 const resetSearch = () => {
-
+  queryFormRef.value.resetFields()
+  getTableData()
 }
 // #endregion
 
 // #region 删除
-const handleDelete = () => {
-
+const handleDelete = (e) => {
+  console.log(e.id);
+  ElMessageBox.confirm(
+    '确认删除吗?',
+    '提示',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: '删除成功',
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消删除',
+      })
+    })
 }
 // #endregion
 
 // #region 修改
 const handCreate = () => {
-
+  router.push('/article/create')
 }
-const handleUpdate = () => {
-
+const handleUpdate = (e) => {
+  console.log(e.id);
+  router.push({
+    path: '/article/create',
+    query: {
+      id: e.id
+    }
+  })
 }
 // #endregion
 </script>
@@ -103,9 +134,10 @@ const handleUpdate = () => {
 .search-wrapper {
   margin-bottom: 20px;
 }
+
 .pagination {
   margin-top: 20px;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 </style>
