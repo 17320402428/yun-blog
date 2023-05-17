@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:48
  * @LastEditors: bin
- * @LastEditTime: 2023-04-27 10:30:08
+ * @LastEditTime: 2023-05-17 13:54:39
  * @objectDescription: 全局入口文件
  */
 import { createApp } from 'vue'
@@ -27,6 +27,7 @@ import "normalize.css"
 import "element-plus/dist/index.css"
 import "element-plus/theme-chalk/dark/css-vars.css"
 import "@/styles/index.scss"
+import "md-editor-v3/lib/style.css";
 
 const app = createApp(App)
 /* 加载全局svg */
