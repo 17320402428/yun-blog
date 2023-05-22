@@ -2,13 +2,11 @@
  * @Author: bin
  * @Date: 2023-05-18 16:39:38
  * @LastEditors: bin
- * @LastEditTime: 2023-05-22 11:11:58
+ * @LastEditTime: 2023-05-18 16:39:57
  * @objectDescription: 入口文件
  */
 export interface IGetTableData {
-  title: string,
-  author: string,
-  classification: string,
+  labelName: string,
   creatAt?: string
 }
 export interface IGetTableRequestData {
@@ -17,7 +15,7 @@ export interface IGetTableRequestData {
   /** 查询条数 */
   size: number
   /** 查询参数：标题 */
-  title?: string
+  labelName?: string
 }
 export type GetTableResponseData = IApiResponseData<{
   list: IGetTableData[],

@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-22 10:52:38
+ * @LastEditTime: 2023-05-22 17:19:10
  * @objectDescription: 入口文件
 -->
 <template>
@@ -36,7 +36,15 @@
           </el-table-column>
         </el-table>
         <div class="pagination">
-          <el-pagination background layout="prev, pager, next" :total="1000" />
+          <el-pagination
+            v-model:current-page="queryForm.currentPage"
+            v-model:page-size="queryForm.size"
+            :page-sizes="[10, 20, 30, 40, 50]"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            background
+            layout="total, sizes, prev, pager, next"
+            :total="total" />
         </div>
       </div>
     </el-card>
@@ -50,7 +58,7 @@ import { getTableDataApi } from '@/api/user'
 const loading = ref<boolean>(false)
 // #region 查询
 const tableData = ref<IGetTableData[]>([])
-const total = ref<number>(null)
+const total = ref<number>(0)
 const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   username: '',
@@ -78,6 +86,12 @@ const resetSearch = () => {
   queryFormRef.value.resetFields()
   getTableData()
 }
+const handleSizeChange = () => {
+  getTableData()
+}
+const handleCurrentChange = () => {
+  getTableData()
+}
 // #endregion
 
 // #region 修改
@@ -89,6 +103,4 @@ const handleDelete = () => {
 }
 // #endregion
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

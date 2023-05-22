@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 09:23:19
  * @LastEditors: bin
- * @LastEditTime: 2023-05-19 15:54:22
+ * @LastEditTime: 2023-05-22 17:24:55
  * @objectDescription: 入口文件
 -->
 <template>
@@ -48,6 +48,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="pagination">
+          <el-pagination
+            v-model:current-page="queryForm.currentPage"
+            v-model:page-size="queryForm.size"
+            :page-sizes="[10, 20, 30, 40, 50]"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            background
+            layout="total, sizes, prev, pager, next"
+            :total="total" />
+        </div>
       </div>
     </el-card>
   </div>
@@ -63,7 +74,7 @@ import { getTableDataApi, commentPassApi, commentRejectApi } from '@/api/comment
 const loading = ref<boolean>(false)
 // #region 查询
 const tableData = ref<IGetTableData[]>([])
-const total = ref<number>(null)
+const total = ref<number>(0)
 const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   title: '',
@@ -89,6 +100,12 @@ const handSearch = () => {
 }
 const resetSearch = () => {
   queryFormRef.value.resetFields()
+  getTableData()
+}
+const handleSizeChange = () => {
+  getTableData()
+}
+const handleCurrentChange = () => {
   getTableData()
 }
 // #endregion
