@@ -1,7 +1,120 @@
+<!--
+ * @Author: bin
+ * @Date: 2023-04-27 09:23:19
+ * @LastEditors: bin
+ * @LastEditTime: 2023-05-19 15:54:22
+ * @objectDescription: 入口文件
+-->
 <template>
-  <div>评论管理</div>
+  <div class="app-container">
+    <el-card shadow="never" class="search-wrapper">
+      <el-form ref="queryFormRef" inline :model="queryForm">
+        <el-form-item prop="title" label="文章标题">
+          <el-input v-model="queryForm.title" placeholder="请输入文章标题" />
+        </el-form-item>
+        <el-form-item prop="commentator" label="评论ID">
+          <el-input v-model="queryForm.commentator" placeholder="请输入评论ID" />
+        </el-form-item>
+        <el-form-item prop="content" label="评论内容">
+          <el-input v-model="queryForm.content" placeholder="请输入评论内容" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handSearch">查询</el-button>
+          <el-button type="primary" @click="resetSearch">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card shadow="never">
+      <div class="table-wrapper">
+        <el-table :data="tableData">
+          <el-table-column prop="title" label="标题" align="center" />
+          <el-table-column prop="commentator" label="评论ID" align="center" />
+          <el-table-column prop="content" label="评论内容" align="center" />
+          <el-table-column prop="status" label="审核状态" align="center">
+            <template #default="scope">
+              <el-tag class="mx-1" type="success" effect="plain" round v-if="scope.row.status == '1'">
+                通过
+              </el-tag>
+              <el-tag class="mx-1" type="danger" effect="plain" round v-else>
+                未通过
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="creatAt" label="创建时间" align="center" />
+          <el-table-column fixed="right" label="操作" width="250" align="center">
+            <template #default="scope">
+              <el-button type="warning" link @click="handlePass(scope.row)">通过</el-button>
+              <el-button type="danger" link @click="handleReject(scope.row)">不通过</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </el-card>
+  </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
+import type { FormInstance } from 'element-plus'
+import type { IGetTableData } from '@/api/comment/types/comment'
+import { getTableDataApi, commentPassApi, commentRejectApi } from '@/api/comment'
+
+const loading = ref<boolean>(false)
+// #region 查询
+const tableData = ref<IGetTableData[]>([])
+const total = ref<number>(null)
+const queryFormRef = ref<FormInstance | null>(null)
+const queryForm = reactive({
+  title: '',
+  commentator: '',
+  content: '',
+  currentPage: 1,
+  size: 10
+})
+const getTableData = () => {
+  loading.value = true
+  getTableDataApi(queryForm).then(res => {
+    tableData.value = res.data.list
+    total.value = res.data.total
+  }).catch(() => {
+    tableData.value = []
+  }).finally(() => {
+    loading.value = false
+  })
+}
+getTableData()
+const handSearch = () => {
+  getTableData()
+}
+const resetSearch = () => {
+  queryFormRef.value.resetFields()
+  getTableData()
+}
+// #endregion
+
+// #region 修改
+const handlePass = (e) => {
+  loading.value = true
+  commentPassApi(e.id).then(res => {
+    ElMessage({
+      type: 'success',
+      message: '操作成功',
+    })
+    getTableData()
+  }).catch(() => {
+    ElMessage({
+      type: 'error',
+      message: '操作失败',
+    })
+  }).finally(() => {
+    loading.value = false
+  })
+
+}
+const handleReject = (e) => {
+}
+// #endregion
+</script>
 
 <style lang="scss" scoped></style>

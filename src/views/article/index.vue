@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 08:51:13
  * @LastEditors: bin
- * @LastEditTime: 2023-05-17 10:50:00
+ * @LastEditTime: 2023-05-18 17:31:27
  * @objectDescription: 入口文件
 -->
 <template>
@@ -16,7 +16,7 @@
           <el-input v-model="queryForm.classification" placeholder="请输入文章分类" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handCreate">新增</el-button>
+          <el-button type="primary" @click="handleCreate">新增</el-button>
           <el-button type="primary" @click="handSearch">查询</el-button>
           <el-button type="primary" @click="resetSearch">重置</el-button>
         </el-form-item>
@@ -116,7 +116,7 @@ const handleDelete = (e) => {
 // #endregion
 
 // #region 修改
-const handCreate = () => {
+const handleCreate = () => {
   router.push('/article/create')
 }
 const handleUpdate = (e) => {

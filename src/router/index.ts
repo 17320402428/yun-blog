@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-22 15:17:44
  * @LastEditors: bin
- * @LastEditTime: 2023-05-17 09:00:17
+ * @LastEditTime: 2023-05-19 11:35:20
  * @objectDescription: 入口文件
  */
 /*
@@ -141,38 +141,38 @@ export const constantRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-  {
-    path: "/setting",
-    component: Layout,
-    redirect: "/setting/index",
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/setting/index.vue"),
-        name: "Setting",
-        meta: {
-          title: "网站管理",
-          svgIcon: "setting",
-        }
-      }
-    ]
-  },
-  {
-    path: "/authority",
-    component: Layout,
-    redirect: "/authority/index",
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/authority/index.vue"),
-        name: "Authority",
-        meta: {
-          title: "权限管理",
-          svgIcon: "authority",
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/setting",
+  //   component: Layout,
+  //   redirect: "/setting/index",
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/setting/index.vue"),
+  //       name: "Setting",
+  //       meta: {
+  //         title: "网站管理",
+  //         svgIcon: "setting",
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: "/authority",
+  //   component: Layout,
+  //   redirect: "/authority/index",
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/authority/index.vue"),
+  //       name: "Authority",
+  //       meta: {
+  //         title: "权限管理",
+  //         svgIcon: "authority",
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/advertisement",
     component: Layout,
@@ -228,37 +228,37 @@ export const constantRoutes: RouteRecordRaw[] = [
  * 必须带有 Name 属性
  */
 export const asyncRoutes: RouteRecordRaw[] = [
-  {
-    path: "/permission",
-    component: Layout,
-    redirect: "/permission/page",
-    name: "Permission",
-    meta: {
-      title: "权限管理",
-      svgIcon: "lock",
-      roles: ["admin", "editor"], // 可以在根路由中设置角色
-      alwaysShow: true // 将始终显示根菜单
-    },
-    children: [
-      {
-        path: "page",
-        component: () => import("@/views/permission/page.vue"),
-        name: "PagePermission",
-        meta: {
-          title: "页面权限",
-          roles: ["admin"] // 或者在子导航中设置角色
-        }
-      },
-      {
-        path: "directive",
-        component: () => import("@/views/permission/directive.vue"),
-        name: "DirectivePermission",
-        meta: {
-          title: "指令权限" // 如果未设置角色，则表示：该页面不需要权限，但会继承根路由的角色
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/permission",
+  //   component: Layout,
+  //   redirect: "/permission/page",
+  //   name: "Permission",
+  //   meta: {
+  //     title: "权限管理",
+  //     svgIcon: "lock",
+  //     roles: ["admin", "editor"], // 可以在根路由中设置角色
+  //     alwaysShow: true // 将始终显示根菜单
+  //   },
+  //   children: [
+  //     {
+  //       path: "page",
+  //       component: () => import("@/views/permission/page.vue"),
+  //       name: "PagePermission",
+  //       meta: {
+  //         title: "页面权限",
+  //         roles: ["admin"] // 或者在子导航中设置角色
+  //       }
+  //     },
+  //     {
+  //       path: "directive",
+  //       component: () => import("@/views/permission/directive.vue"),
+  //       name: "DirectivePermission",
+  //       meta: {
+  //         title: "指令权限" // 如果未设置角色，则表示：该页面不需要权限，但会继承根路由的角色
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/:pathMatch(.*)*", // Must put the 'ErrorPage' route at the end, 必须将 'ErrorPage' 路由放在最后
     redirect: "/404",
