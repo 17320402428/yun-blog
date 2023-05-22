@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 08:51:13
  * @LastEditors: bin
- * @LastEditTime: 2023-05-18 17:31:27
+ * @LastEditTime: 2023-05-22 10:53:32
  * @objectDescription: 入口文件
 -->
 <template>
@@ -131,13 +131,4 @@ const handleUpdate = (e) => {
 // #endregion
 </script>
 <style lang="scss" scoped>
-.search-wrapper {
-  margin-bottom: 20px;
-}
-
-.pagination {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
 </style>

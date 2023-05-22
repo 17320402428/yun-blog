@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-17 10:50:20
+ * @LastEditTime: 2023-05-22 10:52:38
  * @objectDescription: 入口文件
 -->
 <template>
@@ -90,13 +90,5 @@ const handleDelete = () => {
 // #endregion
 </script>
 <style lang="scss" scoped>
-.search-wrapper {
-  margin-bottom: 20px;
-}
 
-.pagination {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
 </style>
