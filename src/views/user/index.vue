@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-22 17:19:10
+ * @LastEditTime: 2023-05-24 09:25:06
  * @objectDescription: 入口文件
 -->
 <template>
@@ -23,7 +23,7 @@
     </el-card>
     <el-card shadow="never">
       <div class="table-wrapper">
-        <el-table :data="tableData">
+        <el-table :data="tableData" border>
           <el-table-column prop="username" label="用户名" align="center" />
           <el-table-column prop="email" label="邮箱地址" align="center" />
           <el-table-column prop="phone" label="手机号" align="center" />

@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 09:24:08
  * @LastEditors: bin
- * @LastEditTime: 2023-05-22 17:20:37
+ * @LastEditTime: 2023-05-24 10:35:01
  * @objectDescription: 入口文件
 -->
 <template>
@@ -10,44 +10,70 @@
     <el-card shadow="never" class="search-wrapper">
       <el-form ref="queryFormRef" inline :model="queryForm">
         <el-form-item prop="title" label="标签名称">
-          <el-input v-model="queryForm.labelName" placeholder="请输入文章标题" />
+          <el-input v-model="queryForm.lableName" placeholder="请输入文章标题" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handSearch">查询</el-button>
+          <el-button type="primary" @click="handleSearch">查询</el-button>
           <el-button type="primary" @click="resetSearch">重置</el-button>
+          <el-button type="primary" @click="dialogVisible = true">新增</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card shadow="never">
       <div class="table-wrapper">
-        <el-table :data="tableData">
-          <el-table-column prop="labelName" label="标签名称" align="center" />
+        <el-table :data="tableData" border>
+          <el-table-column prop="lableName" label="标签名称" align="center" />
           <el-table-column prop="labelId" label="标签值" align="center" />
+          <el-table-column prop="status" label="状态" align="center">
+            <template #default="scope">
+              <el-tag class="mx-1" type="success" effect="plain" round v-if="scope.row.status == '1'">
+                启用
+              </el-tag>
+              <el-tag class="mx-1" type="danger" effect="plain" round v-else>
+                禁用
+              </el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="creatAt" label="创建时间" align="center" />
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
+              <el-button type="success" link @click="handleUpdate(scope.row)">编辑</el-button>
               <el-button type="danger" link @click="handleDelete(scope.row)">删除</el-button>
+              <el-button type="primary" link @click="handleEnable(scope.row)">启用</el-button>
+              <el-button type="info" link @click="handleDisable(scope.row)">禁用</el-button>
             </template>
           </el-table-column>
         </el-table>
         <div class="pagination">
-          <el-pagination
-            v-model:current-page="queryForm.currentPage"
-            v-model:page-size="queryForm.size"
-            :page-sizes="[10, 20, 30, 40, 50]"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            background
-            layout="total, sizes, prev, pager, next"
-            :total="total" />
+          <el-pagination v-model:current-page="queryForm.currentPage" v-model:page-size="queryForm.size"
+            :page-sizes="[10, 20, 30, 40, 50]" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+            background layout="total, sizes, prev, pager, next" :total="total" />
         </div>
       </div>
     </el-card>
+    <el-dialog v-model="dialogVisible" title="新增标签" width="30%">
+      <el-form ref="addFormRef" :model="addForm">
+        <el-form-item label="标签名">
+          <el-input v-model="addForm.lableName" placeholder="请输入标签名"/>
+        </el-form-item>
+        <el-form-item label="标签值">
+          <el-input v-model="addForm.lableId" placeholder="请输入标签值"/>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="submitLabel">
+            确认
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 import { ElMessage, FormInstance, ElMessageBox } from 'element-plus'
 import { getTableDataApi } from '@/api/label/index'
 const loading = ref<boolean>(false)
@@ -59,7 +85,7 @@ const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   currentPage: 1,
   size: 10,
-  labelName: ''
+  lableName: ''
 })
 const getTableData = () => {
   loading.value = true
@@ -73,7 +99,7 @@ const getTableData = () => {
   })
 }
 getTableData()
-const handSearch = () => {
+const handleSearch = () => {
   getTableData()
 }
 const resetSearch = () => {
@@ -111,6 +137,32 @@ const handleDelete = (e) => {
         message: '取消删除',
       })
     })
+}
+// #endregion
+
+// #region 新增
+const addFormRef = ref<FormInstance | null>(null)
+const dialogVisible = ref<boolean>(false)
+const addForm = reactive({
+  lableName: '',
+  lableId: ''
+})
+// #endregion
+
+// #region 修改
+const handleUpdate = (e) => {
+  dialogVisible.value = true
+  addForm.lableName = e.lableName
+  addForm.lableId = e.lableId
+}
+const handleEnable = (e) => {
+
+}
+const handleDisable = (e) => {
+
+}
+const submitLabel = () => {
+
 }
 // #endregion
 </script>
