@@ -1,3 +1,10 @@
+<!--
+ * @Author: bin
+ * @Date: 2023-04-17 09:05:35
+ * @LastEditors: bin
+ * @LastEditTime: 2023-11-21 10:16:01
+ * @objectDescription: 入口文件
+-->
 <template>
   <div class="login-container">
     <ThemeSwitch class="theme-switch" />
@@ -15,7 +22,7 @@
             <el-input v-model.trim="loginForm.password" placeholder="密码" type="password" tabindex="2" :prefix-icon="Lock"
               size="large" show-password />
           </el-form-item>
-          <el-form-item prop="code">
+          <!-- <el-form-item prop="code">
             <el-input v-model.trim="loginForm.code" placeholder="验证码" type="text" tabindex="3" :prefix-icon="Key"
               maxlength="7" size="large">
               <template #append>
@@ -33,7 +40,7 @@
                 </el-image>
               </template>
             </el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin"> 登 录 </el-button>
         </el-form>
       </div>
@@ -60,7 +67,7 @@ const codeUrl = ref("")
 const loginForm: ILoginRequestData = reactive({
   username: "admin",
   password: "12345678",
-  code: ""
+  // code: ""
 })
 /** 登录表单校验规则 */
 const loginFormRules: FormRules = {
@@ -69,7 +76,7 @@ const loginFormRules: FormRules = {
     { required: true, message: "请输入密码", trigger: "blur" },
     { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
   ],
-  code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+  // code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
 }
 /** 登录逻辑 */
 const handleLogin = () => {
@@ -79,14 +86,14 @@ const handleLogin = () => {
       useUserStore()
         .login({
           username: loginForm.username,
-          password: loginForm.password,
-          code: loginForm.code
+          password: loginForm.password
+          // code: loginForm.code
         })
         .then((res) => {
           router.push({ path: "/" })
         })
         .catch(() => {
-          createCode()
+          // createCode()
           loginForm.password = ""
         })
         .finally(() => {
@@ -100,7 +107,7 @@ const handleLogin = () => {
 /** 创建验证码 */
 const createCode = () => {
   // 先清空验证码的输入
-  loginForm.code = ""
+  // loginForm.code = ""
   // 获取验证码
   codeUrl.value = ""
   getLoginCodeApi().then((res) => {
@@ -109,7 +116,7 @@ const createCode = () => {
 }
 
 /** 初始化验证码 */
-createCode()
+// createCode()
 </script>
 <style lang="scss" scoped>
 .login-container {

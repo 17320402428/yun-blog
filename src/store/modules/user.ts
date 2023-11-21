@@ -28,7 +28,7 @@ export const useUserStore = defineStore("user", () => {
       loginApi({
         username: loginData.username,
         password: loginData.password,
-        code: loginData.code
+        // code: loginData.code
       })
         .then((res) => {
           setToken(res.data.access_token)

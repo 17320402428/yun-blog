@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-05-24 09:25:06
+ * @LastEditTime: 2023-11-16 14:04:34
  * @objectDescription: 入口文件
 -->
 <template>
@@ -12,8 +12,8 @@
         <el-form-item prop="username" label="用户名">
           <el-input v-model="queryForm.username" placeholder="请输入用户名" />
         </el-form-item>
-        <el-form-item prop="phone" label="手机号">
-          <el-input v-model="queryForm.phone" placeholder="请输入手机号" />
+        <el-form-item prop="email" label="邮箱">
+          <el-input v-model="queryForm.email" placeholder="请输入邮箱" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handSearch">查询</el-button>
@@ -26,7 +26,7 @@
         <el-table :data="tableData" border>
           <el-table-column prop="username" label="用户名" align="center" />
           <el-table-column prop="email" label="邮箱地址" align="center" />
-          <el-table-column prop="phone" label="手机号" align="center" />
+          <el-table-column prop="userType" label="用户类型" align="center" />
           <el-table-column prop="creatAt" label="创建时间" align="center" />
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
@@ -62,7 +62,7 @@ const total = ref<number>(0)
 const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   username: '',
-  phone: '',
+  email: '',
   currentPage: 1,
   size: 10
 })
