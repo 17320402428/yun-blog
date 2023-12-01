@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 09:24:08
  * @LastEditors: bin
- * @LastEditTime: 2023-05-24 10:35:01
+ * @LastEditTime: 2023-11-24 09:40:30
  * @objectDescription: 入口文件
 -->
 <template>
@@ -23,24 +23,11 @@
       <div class="table-wrapper">
         <el-table :data="tableData" border>
           <el-table-column prop="lableName" label="标签名称" align="center" />
-          <el-table-column prop="labelId" label="标签值" align="center" />
-          <el-table-column prop="status" label="状态" align="center">
-            <template #default="scope">
-              <el-tag class="mx-1" type="success" effect="plain" round v-if="scope.row.status == '1'">
-                启用
-              </el-tag>
-              <el-tag class="mx-1" type="danger" effect="plain" round v-else>
-                禁用
-              </el-tag>
-            </template>
-          </el-table-column>
           <el-table-column prop="creatAt" label="创建时间" align="center" />
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
               <el-button type="success" link @click="handleUpdate(scope.row)">编辑</el-button>
               <el-button type="danger" link @click="handleDelete(scope.row)">删除</el-button>
-              <el-button type="primary" link @click="handleEnable(scope.row)">启用</el-button>
-              <el-button type="info" link @click="handleDisable(scope.row)">禁用</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -55,9 +42,6 @@
       <el-form ref="addFormRef" :model="addForm">
         <el-form-item label="标签名">
           <el-input v-model="addForm.lableName" placeholder="请输入标签名"/>
-        </el-form-item>
-        <el-form-item label="标签值">
-          <el-input v-model="addForm.lableId" placeholder="请输入标签值"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -154,12 +138,6 @@ const handleUpdate = (e) => {
   dialogVisible.value = true
   addForm.lableName = e.lableName
   addForm.lableId = e.lableId
-}
-const handleEnable = (e) => {
-
-}
-const handleDisable = (e) => {
-
 }
 const submitLabel = () => {
 
