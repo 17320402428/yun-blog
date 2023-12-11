@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2022-09-21 09:51:50
  * @LastEditors: bin
- * @LastEditTime: 2023-04-24 10:23:53
+ * @LastEditTime: 2023-12-08 14:55:40
  * @objectDescription: vite配置文件
  */
 import { defineConfig } from 'vite'
@@ -42,7 +42,7 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
       /** 接口代理 */
       proxy: {
         '/api/v1': {
-          target: 'https://mock.mengxuegu.com/mock/643f9ca1dfa03133b0ca75b8/api/v1',
+          target: 'http://localhost:3000/admin',
           ws: true,
           /** 是否允许跨域 */
           changeOrigin: true,
