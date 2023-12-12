@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-24 15:10:53
  * @LastEditors: bin
- * @LastEditTime: 2023-11-16 14:04:34
+ * @LastEditTime: 2023-12-12 14:40:27
  * @objectDescription: 入口文件
 -->
 <template>
@@ -25,9 +25,29 @@
       <div class="table-wrapper">
         <el-table :data="tableData" border>
           <el-table-column prop="username" label="用户名" align="center" />
-          <el-table-column prop="email" label="邮箱地址" align="center" />
-          <el-table-column prop="userType" label="用户类型" align="center" />
-          <el-table-column prop="creatAt" label="创建时间" align="center" />
+          <el-table-column prop="nickname" label="昵称" align="center" />
+          <el-table-column prop="email" label="邮箱" align="center" />
+          <el-table-column prop="user_type" label="用户类型" align="center" >
+            <template #default="scope">
+              <div>
+                {{ scope.row.user_type === "1"? '普通用户' : '管理员' }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="createdAt" label="创建时间" align="center" >
+            <template #default="scope">
+              <div>
+                {{ timestampToTime(scope.row.createdAt) }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="updatedAt" label="更新时间" align="center" >
+            <template #default="scope">
+              <div>
+                {{ timestampToTime(scope.row.updatedAt) }}
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="250" align="center">
             <template #default="scope">
               <!-- <el-button type="primary" @click="handleUpdate">修改</el-button> -->
@@ -37,8 +57,8 @@
         </el-table>
         <div class="pagination">
           <el-pagination
-            v-model:current-page="queryForm.currentPage"
-            v-model:page-size="queryForm.size"
+            v-model:current-page="queryForm.offset"
+            v-model:page-size="queryForm.limit"
             :page-sizes="[10, 20, 30, 40, 50]"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -55,6 +75,7 @@ import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus';
 import type { IGetTableData } from '@/api/user/types/user'
 import { getTableDataApi } from '@/api/user'
+import {timestampToTime } from "@/utils/filter"
 const loading = ref<boolean>(false)
 // #region 查询
 const tableData = ref<IGetTableData[]>([])
@@ -63,14 +84,13 @@ const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   username: '',
   email: '',
-  currentPage: 1,
-  size: 10
+  offset: 1,
+  limit: 10
 })
 const getTableData = () => {
   loading.value = true
   getTableDataApi(queryForm).then(res => {
-    console.log(res.data);
-    tableData.value = res.data.list
+    tableData.value = res.data.data
     total.value = res.data.total
   }).catch(() => {
     tableData.value = []
@@ -99,7 +119,7 @@ const handleUpdate = () => {
 
 }
 const handleDelete = () => {
-
+  
 }
 // #endregion
 </script>

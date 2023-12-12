@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 09:24:08
  * @LastEditors: bin
- * @LastEditTime: 2023-11-24 09:40:30
+ * @LastEditTime: 2023-12-11 12:00:07
  * @objectDescription: 入口文件
 -->
 <template>
@@ -32,7 +32,7 @@
           </el-table-column>
         </el-table>
         <div class="pagination">
-          <el-pagination v-model:current-page="queryForm.currentPage" v-model:page-size="queryForm.size"
+          <el-pagination v-model:current-page="queryForm.offset" v-model:page-size="queryForm.limit"
             :page-sizes="[10, 20, 30, 40, 50]" @size-change="handleSizeChange" @current-change="handleCurrentChange"
             background layout="total, sizes, prev, pager, next" :total="total" />
         </div>
@@ -67,8 +67,8 @@ const tableData = ref([])
 const total = ref<number>(0)
 const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
-  currentPage: 1,
-  size: 10,
+  offset: 1,
+  limit: 10,
   lableName: ''
 })
 const getTableData = () => {

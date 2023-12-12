@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-17 09:05:35
  * @LastEditors: bin
- * @LastEditTime: 2023-11-21 10:16:01
+ * @LastEditTime: 2023-12-12 11:13:40
  * @objectDescription: 入口文件
 -->
 <template>
@@ -56,6 +56,7 @@ import ThemeSwitch from "@/components/ThemeSwitch/index.vue"
 import { type FormInstance, FormRules } from "element-plus"
 import { getLoginCodeApi } from "@/api/login"
 import { type ILoginRequestData } from "@/api/login/types/login"
+import md5 from 'js-md5'
 const router = useRouter()
 const loginFormRef = ref<FormInstance | null>(null)
 
@@ -65,8 +66,8 @@ const loading = ref(false)
 const codeUrl = ref("")
 /** 登录表单数据 */
 const loginForm: ILoginRequestData = reactive({
-  username: "admin",
-  password: "12345678",
+  username: "",
+  password: "",
   // code: ""
 })
 /** 登录表单校验规则 */
@@ -86,7 +87,7 @@ const handleLogin = () => {
       useUserStore()
         .login({
           username: loginForm.username,
-          password: loginForm.password
+          password: md5(loginForm.password)
           // code: loginForm.code
         })
         .then((res) => {

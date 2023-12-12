@@ -13,9 +13,9 @@ export interface IGetTableData {
 }
 export interface IGetTableRequestData {
   /** 当前页码 */
-  currentPage: number
+  offset: number
   /** 查询条数 */
-  size: number
+  limit: number
   /** 查询参数：标题 */
   title?: string
 }

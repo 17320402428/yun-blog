@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 09:23:19
  * @LastEditors: bin
- * @LastEditTime: 2023-12-01 11:11:19
+ * @LastEditTime: 2023-12-11 12:02:06
  * @objectDescription: 入口文件
 -->
 <template>
@@ -53,8 +53,8 @@
         </el-table>
         <div class="pagination">
           <el-pagination
-            v-model:current-page="queryForm.currentPage"
-            v-model:page-size="queryForm.size"
+            v-model:current-page="queryForm.offset"
+            v-model:page-size="queryForm.limit"
             :page-sizes="[10, 20, 30, 40, 50]"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -83,8 +83,8 @@ const queryForm = reactive({
   title: '',
   commentator: '',
   content: '',
-  currentPage: 1,
-  size: 10
+  offset: 1,
+  limit: 10
 })
 const getTableData = () => {
   loading.value = true
