@@ -9,6 +9,6 @@ export interface ILoginRequestData {
 
 export type LoginCodeResponseData = IApiResponseData<string>
 
-export type LoginResponseData = IApiResponseData<{ token: string;accesstoken: string }>
+export type LoginResponseData = IApiResponseData<{ token: string;accesstoken: string; userid: string }>
 
 export type UserInfoResponseData = IApiResponseData<{ username: string; roles: string[] }>

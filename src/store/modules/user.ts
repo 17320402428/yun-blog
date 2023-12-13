@@ -3,7 +3,7 @@ import store from "@/store"
 import { defineStore } from "pinia"
 import { usePermissionStore } from "./permission"
 import { useTagsViewStore } from "./tags-view"
-import { getToken, removeToken, setToken } from "@/utils/cache/cookies"
+import { getToken, removeToken, setToken, setUserInfo } from "@/utils/cache/cookies"
 import router, { resetRouter } from "@/router"
 import { loginApi, getUserInfoApi } from "@/api/login"
 import { type ILoginRequestData } from "@/api/login/types/login"
@@ -32,6 +32,7 @@ export const useUserStore = defineStore("user", () => {
       })
         .then((res) => {
           setToken(res.data.accesstoken)
+          setUserInfo(res.data.userid)
           token.value = res.data.accesstoken
           resolve(res.data)
         })
