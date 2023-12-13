@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-04-27 08:51:13
  * @LastEditors: bin
- * @LastEditTime: 2023-12-12 17:29:42
+ * @LastEditTime: 2023-12-13 10:15:47
  * @objectDescription: 入口文件
 -->
 <template>
@@ -21,7 +21,7 @@
     </el-card>
     <el-card shadow="never">
       <div class="table-wrapper">
-        <el-table :data="tableData" border>
+        <el-table v-loading="loading" :data="tableData" border>
           <el-table-column prop="title" label="标题" align="center" />
           <el-table-column label="标签" align="center">
             <template #default="scope">
@@ -30,21 +30,21 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="作者" align="center" >
+          <el-table-column label="作者" align="center">
             <template #default="scope">
               <div>
                 {{ scope.row.author ? scope.row.author.username : '未知' }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="createdAt" label="创建时间" align="center" >
+          <el-table-column prop="createdAt" label="创建时间" align="center">
             <template #default="scope">
               <div>
                 {{ timestampToTime(scope.row.createdAt) }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="updatedAt" label="更新时间" align="center" >
+          <el-table-column prop="updatedAt" label="更新时间" align="center">
             <template #default="scope">
               <div>
                 {{ timestampToTime(scope.row.updatedAt) }}
@@ -59,15 +59,9 @@
           </el-table-column>
         </el-table>
         <div class="pagination">
-          <el-pagination
-            v-model:current-page="queryForm.offset"
-            v-model:page-size="queryForm.limit"
-            :page-sizes="[10, 20, 30, 40, 50]"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            background
-            layout="total, sizes, prev, pager, next"
-            :total="total" />
+          <el-pagination v-model:current-page="queryForm.offset" v-model:page-size="queryForm.limit"
+            :page-sizes="[10, 20, 30, 40, 50]" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+            background layout="total, sizes, prev, pager, next" :total="total" />
         </div>
       </div>
     </el-card>
@@ -79,8 +73,8 @@ import { reactive, ref } from "vue"
 import { useRouter } from "vue-router";
 import type { IGetTableData } from '@/api/article/types/article'
 import type { FormInstance } from 'element-plus';
-import { getTableDataApi } from '@/api/article'
-import {timestampToTime } from "@/utils/filter"
+import { getTableDataApi, deleteArticleApi } from '@/api/article'
+import { timestampToTime } from "@/utils/filter"
 
 const router = useRouter()
 const loading = ref<boolean>(false)
@@ -91,7 +85,6 @@ const total = ref<number>(0)
 const queryFormRef = ref<FormInstance | null>(null)
 const queryForm = reactive({
   title: '',
-  /* 文章分类 */
   offset: 1,
   limit: 10
 })
@@ -134,9 +127,22 @@ const handleDelete = (e) => {
     }
   )
     .then(() => {
-      ElMessage({
-        type: 'success',
-        message: '删除成功',
+      loading.value = true
+      deleteArticleApi({
+        id: e._id
+      }).then(res => {
+        ElMessage({
+          type: 'success',
+          message: '删除成功',
+        })
+        getTableData()
+      }).catch(() => {
+        ElMessage({
+          type: 'success',
+          message: '删除失败',
+        })
+      }).finally(() => {
+        loading.value = false
       })
     })
     .catch(() => {
@@ -163,5 +169,4 @@ const handleUpdate = (e) => {
 }
 // #endregion
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
