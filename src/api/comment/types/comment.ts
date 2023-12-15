@@ -20,6 +20,6 @@ export interface IGetTableRequestData {
   title?: string
 }
 export type GetTableResponseData = IApiResponseData<{
-  list: IGetTableData[],
+  data: IGetTableData[],
   total: number
 }>
