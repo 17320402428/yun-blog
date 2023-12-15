@@ -16,28 +16,28 @@ export function getTableDataApi(params: Table.IGetTableRequestData) {
   })
 }
 export function createArticleApi(data) {
-  return request<Table.CreateTableResponseData>({
+  return request<Table.TableResponseData>({
     url: 'createArticle',
     method: 'post',
     data
   })
 }
 export function deleteArticleApi(data) {
-  return request<Table.DeleteTableResponseData>({
+  return request<Table.TableResponseData>({
     url: 'deleteArticle',
     method: 'post',
     data
   })
 }
 export function detailArticleApi(params) {
-  return request<Table.DetailTableResponseData>({
+  return request<Table.TableResponseData>({
     url: 'detailArticle',
     method: 'get',
     params
   })
 }
 export function editArticleApi(data) {
-  return request<Table.EditTableResponseData>({
+  return request<Table.TableResponseData>({
     url: 'updateArticle',
     method: 'post',
     data

@@ -1,3 +1,10 @@
+/*
+ * @Author: bin
+ * @Date: 2023-04-17 09:12:36
+ * @LastEditors: bin
+ * @LastEditTime: 2023-12-14 10:26:48
+ * @objectDescription: 入口文件
+ */
 export interface ILoginRequestData {
   /** admin 或 editor */
   username: string
@@ -9,6 +16,10 @@ export interface ILoginRequestData {
 
 export type LoginCodeResponseData = IApiResponseData<string>
 
-export type LoginResponseData = IApiResponseData<{ token: string;accesstoken: string; userid: string }>
+export type LoginResponseData = IApiResponseData<{
+  token: string
+  accesstoken: string
+  userid: string
+}>
 
 export type UserInfoResponseData = IApiResponseData<{ username: string; roles: string[] }>
