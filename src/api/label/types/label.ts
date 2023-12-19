@@ -2,7 +2,7 @@
  * @Author: bin
  * @Date: 2023-05-18 16:39:38
  * @LastEditors: bin
- * @LastEditTime: 2023-05-18 16:39:57
+ * @LastEditTime: 2023-12-18 15:39:13
  * @objectDescription: 入口文件
  */
 export interface IGetTableData {
@@ -18,6 +18,9 @@ export interface IGetTableRequestData {
   labelName?: string
 }
 export type GetTableResponseData = IApiResponseData<{
-  list: IGetTableData[],
+  data: IGetTableData[],
   total: number
+}>
+export type TableResponseData = IApiResponseData<{
+  data: any[]
 }>
